@@ -1,0 +1,39 @@
+class Node:
+    def __init__(self, data=None):
+        self.data=data
+        self.next=None
+class SLinkedList:
+    def __init__(self):
+        self.head=None
+    def AtBeginning(self,data_in):
+        NewNode=Node(data_in)
+        NewNode.next=self.head
+        self.head=NewNode
+    def RemoveNode(self,Removekey):
+        Headval=self.head
+        if (Headval is not None):
+            if (Headval.data==Removekey):
+                self.head=Headval.next
+                Headval=None
+                return
+            while(Headval is not None):
+                if Headval.data==Removekey:
+                    break
+                prev=Headval 
+                Headval=Headval.next
+                if (Headval==None):
+                    return
+            prev.next=Headval.next
+            Headval=None
+    def LListprint(self):
+        printval=self.head
+        while(printval):
+            print(printval.data)
+            printval=printval.next
+llist=SLinkedList()
+llist.AtBeginning("Mon")
+llist.AtBeginning("Tue")
+llist.AtBeginning("Wed")
+llist.AtBeginning("Thu")
+llist.RemoveNode("Tue")
+llist.LListprint()
