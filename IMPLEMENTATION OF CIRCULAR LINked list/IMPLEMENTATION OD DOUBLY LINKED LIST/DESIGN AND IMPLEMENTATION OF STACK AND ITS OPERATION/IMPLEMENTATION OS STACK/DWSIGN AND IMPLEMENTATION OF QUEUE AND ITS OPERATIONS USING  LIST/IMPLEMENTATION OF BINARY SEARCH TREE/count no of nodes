@@ -1,0 +1,36 @@
+class NewNode:
+	def __init__(self, data):
+		self.data = data
+		self.left = None
+		self.right = None
+
+
+def getCount(root, low, high):
+	if root is None:
+		return 0
+
+	if low <= root.data <= high:
+		return (
+			1
+			+ getCount(root.left, low, high)
+			+ getCount(root.right, low, high)
+		)
+
+	if root.data < low:
+		return getCount(root.right, low, high)
+
+	return getCount(root.left, low, high)
+
+
+if __name__ == "__main__":
+	root = NewNode(10)
+	root.left = NewNode(5)
+	root.right = NewNode(50)
+	root.left.left = NewNode(1)
+	root.right.left = NewNode(40)
+	root.right.right = NewNode(100)
+
+	low = 5
+	high = 45
+	count = getCount(root, low, high)
+	print("Count of nodes between [", low, ", ", high, "] is ", count)
