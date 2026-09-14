@@ -1,0 +1,52 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None  
+class CreateList:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+    def add(self,data):
+        newNode=Node(data)
+        if self.head is None:
+            self.head=newNode
+            self.tail=newNode
+            newNode.next=self.head
+        else:
+            self.tail.next=newNode
+            self.tail=newNode
+            self.tail.next=self.head
+    def DeleteEnd(self):
+        if self.head is None:
+            return
+        if self.head == self.tail:
+            self.head=self.tail=None
+            return
+        current=self.head
+        while current.next != self.tail:
+            current=current.next
+        current.next=self.head
+        self.tail=current
+    def display(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        current=self.head
+        while True:
+            print(current.data, end=" ")
+            current=current.next
+            if current == self.head:
+                break
+        print()
+class CircularLinkedList:
+    c1=CreateList()
+    c1.add(1)
+    c1.add(2)
+    c1.add(3)
+    c1.add(4)
+    print("Original  List:")
+    c1.display()
+    while(c1.head!=None):
+        c1.DeleteEnd()
+        print("UPdated  List:")
+        c1.display()
