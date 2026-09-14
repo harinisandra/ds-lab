@@ -1,0 +1,74 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.last = None
+
+    def addToEmpty(self, data):
+        if self.last is not None:
+            return self.last
+        temp = Node(data)
+        self.last = temp
+        self.last.next = self.last
+        return self.last
+
+    def addBegin(self, data):
+        if self.last is None:
+            return self.addToEmpty(data)
+        temp = Node(data)
+        temp.next = self.last.next
+        self.last.next = temp
+        return self.last
+
+    def addEnd(self, data):
+        if self.last is None:
+            return self.addToEmpty(data)
+        temp = Node(data)
+        temp.next = self.last.next
+        self.last.next = temp
+        self.last = temp
+        return self.last
+
+    def addAfter(self, data, item):
+        if self.last is None:
+            return None
+        temp = Node(data)
+        head = self.last.next
+        current = head
+        while True:
+            if current.data == item:
+                temp.next = current.next
+                current.next = temp
+                if current == self.last:
+                    self.last = temp
+                return self.last
+            current = current.next
+            if current == head:
+                print(item, "not present in the list")
+                return self.last
+
+    def traverse(self):
+        if self.last is None:
+            print("List is empty")
+            return
+        head = self.last.next
+        current = head
+        while True:
+            print(current.data, end=" ")
+            current = current.next
+            if current == head:
+                break
+
+
+if __name__ == "__main__":
+    llist = CircularLinkedList()
+    llist.addToEmpty(6)
+    llist.addBegin(4)
+    llist.addBegin(2)
+    llist.addEnd(8)
+    llist.addEnd(12)
+    llist.addAfter(10, 8)
+    llist.traverse()
